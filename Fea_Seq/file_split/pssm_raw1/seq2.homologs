@@ -1,0 +1,31 @@
+# PSIBLAST 2.15.0+
+# Iteration: 1
+# Query: seq2
+# Database: PSSM/Database/Swissprot/Uniprot_database
+# Fields: query acc.ver, subject acc.ver, % identity, alignment length, mismatches, gap opens, q. start, q. end, s. start, s. end, evalue, bit score
+# 8 hits found
+seq2	P02686	100.000	24	0	0	1	24	281	304	9.98e-09	50.4
+seq2	P25188	100.000	24	0	0	1	24	144	167	1.01e-08	49.3
+seq2	P81558	100.000	24	0	0	1	24	148	171	1.01e-08	49.3
+seq2	P02687	100.000	24	0	0	1	24	146	169	1.03e-08	49.3
+seq2	P06906	100.000	24	0	0	1	24	148	171	1.05e-08	49.3
+seq2	P02688	100.000	24	0	0	1	24	172	195	1.42e-08	49.3
+seq2	P83487	95.833	24	1	0	1	24	149	172	3.34e-08	48.1
+seq2	P25274	91.667	24	2	0	1	24	145	168	7.53e-08	47.0
+# PSIBLAST 2.15.0+
+# Iteration: 2
+# Query: seq2
+# Database: PSSM/Database/Swissprot/Uniprot_database
+# Fields: query acc.ver, subject acc.ver, % identity, alignment length, mismatches, gap opens, q. start, q. end, s. start, s. end, evalue, bit score
+# 8 hits found
+seq2	P02686	100.000	24	0	0	1	24	281	304	1.86e-06	43.8
+seq2	P02688	100.000	24	0	0	1	24	172	195	6.48e-06	42.3
+seq2	P81558	100.000	24	0	0	1	24	148	171	9.64e-06	41.5
+seq2	P02687	100.000	24	0	0	1	24	146	169	1.11e-05	41.5
+seq2	P83487	95.833	24	1	0	1	24	149	172	1.19e-05	41.1
+seq2	P25188	100.000	24	0	0	1	24	144	167	1.33e-05	41.1
+seq2	P06906	100.000	24	0	0	1	24	148	171	1.56e-05	41.1
+seq2	P25274	91.667	24	2	0	1	24	145	168	2.13e-05	40.8
+
+Search has CONVERGED!
+# BLAST processed 2 queries
