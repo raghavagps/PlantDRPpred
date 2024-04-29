@@ -2,12 +2,12 @@
 A method for prediction plant resistance protein
 
 # Introduction
-peepred is developed for predicting, mapping and scanning plant resistances proteins . More information on prrpred is available from its web server http://webs.iiitd.edu.in/raghava/plantprrpred. This page provide information about standalone version of plantPrrpred.
+plantPRRpred is developed for predicting, mapping and scanning plant resistances proteins . More information on prrpred is available from its web server http://webs.iiitd.edu.in/raghava/plantprrpred. This page provide information about standalone version of plantPrrpred.
 
 ## PIP Installation
 PIP version is also available for easy installation and usage of this tool. The following command is required to install the package 
 ```
-pip install prrpred
+pip install plantprrpred
 ```
 To know about the available option for the pip package, type the following command:
 ```
