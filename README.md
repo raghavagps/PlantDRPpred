@@ -1,22 +1,22 @@
-# PlantPRRpred
+# PlantDRPpred
 A method for prediction plant resistance protein
 
 # Introduction
-plantPRRpred is developed for predicting, mapping and scanning plant resistances proteins . More information on prrpred is available from its web server http://webs.iiitd.edu.in/raghava/plantprrpred. This page provide information about standalone version of plantPrrpred.
+plantDRPpred is developed for predicting, mapping and scanning plant resistances proteins . More information on prrpred is available from its web server http://webs.iiitd.edu.in/raghava/plantDRPpred. This page provide information about standalone version of plantDRPpred.
 
 ## PIP Installation
 PIP version is also available for easy installation and usage of this tool. The following command is required to install the package 
 ```
-pip install plantprrpred
+pip install plantDRPpred
 ```
 To know about the available option for the pip package, type the following command:
 ```
-plantPRRpred -h
+plantDRPpred -h
 ```
 
 # Standalone
 
-Standalone version of plantPRRPred is written in python3 and the following libraries are necessary for a successful run:
+Standalone version of plantDRPpred is written in python3 and the following libraries are necessary for a successful run:
 
 - scikit-learn
 - Pandas
@@ -27,7 +27,7 @@ Standalone version of plantPRRPred is written in python3 and the following libra
 
 - Due to large size of the model file, we have not included it in the zipped folder or GitHub repository, thus to run standalone successfully you need to download model file and then unzip them.
 - Make sure you extract the downloaded zip file in the directory where main execution file i.e. package.py is available.
-- To download the model file click [here].(https://webs.iiitd.edu.in/raghava/plantPrrpred/svc_model.zip)
+- To download the model file click [here].(https://webs.iiitd.edu.in/raghava/plantdrppred/svc_model.zip)
 
 **Minimum USAGE** 
 
@@ -77,7 +77,7 @@ optional arguments:
   ii) Model2 for predicting given input peptide/protein sequence as R proteins and non-R protein using Hybrid approach, which is the ensemble of ET + BLAST. It combines the scores generated from machine learning (ET), and BLAST as Hybrid Score, and the prediction is based on Hybrid Score.
 
 
-PlantPRRpred Package Files
+PlantDRPpred Package Files
 =======================
 It contain following files, brief description of these files given below
 
