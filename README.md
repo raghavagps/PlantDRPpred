@@ -1,8 +1,8 @@
 # PlantDRPpred
-A method for prediction plant resistance protein
+A method for prediction Plant Diesease Resistance Protein
 
 # Introduction
-plantDRPpred is developed for predicting, mapping and scanning plant resistances proteins . More information on prrpred is available from its web server http://webs.iiitd.edu.in/raghava/plantDRPpred. This page provide information about standalone version of plantDRPpred.
+plantDRPpred is developed for predicting, mapping and scanning plant resistances proteins . More information on PlantDRPpred is available from its web server http://webs.iiitd.edu.in/raghava/plantdrppred. This page provide information about standalone version of plantDRPpred.
 
 ## PIP Installation
 PIP version is also available for easy installation and usage of this tool. The following command is required to install the package 
@@ -16,7 +16,7 @@ plantDRPpred -h
 
 # Standalone
 
-Standalone version of plantDRPpred is written in python3 and the following libraries are necessary for a successful run:
+Standalone version of PlantDRPpred is written in python3 and the following libraries are necessary for a successful run:
 
 - scikit-learn
 - Pandas
@@ -26,18 +26,18 @@ Standalone version of plantDRPpred is written in python3 and the following libra
 # Important Note
 
 - Due to large size of the model file, we have not included it in the zipped folder or GitHub repository, thus to run standalone successfully you need to download model file and then unzip them.
-- Make sure you extract the downloaded zip file in the directory where main execution file i.e. package.py is available.
+- Make sure you extract the downloaded zip file in the directory where main execution file i.e. PlantDRPpred.py is available.
 - To download the model file click [here].(https://webs.iiitd.edu.in/raghava/plantdrppred/svc_model.zip)
 
 **Minimum USAGE** 
 
 To know about the available option for the standalone, type the following command:
 ```
-package.py -h
+PlantDRPpred.py -h
 ```
 To run the example, type the following command:
 ```
-package.py -i seq.fasta
+PlantDRPpred.py -i seq.fasta
 
 ```
 where seq.fasta is a input FASTA file. This will predict plant resistances protein in FASTA format. It will use other parameters by default. It will save output in "output_result.csv" in CSV (comma separated variables).
@@ -81,22 +81,19 @@ PlantDRPpred Package Files
 =======================
 It contain following files, brief description of these files given below
 
-INSTALLATION  	: Installation instructions
-
 LICENSE       	: License information
 
-envfile : This file provide the path information for BLAST and MERCI commands ,and data 
-          required to run BLAST and MERCI
+Fea_Seq : This folder contains the gerated features 
 
-Database: This folder contains the blast database
+pfeature_standaslone : This folder allow to genrate AAC feature 
 
-progs : This folder contains the program to run MERCI
+PSSM : This folder allow to genrate PSSM feature 
 
 README.md     	: This file provide information about this package
 
-package.py 	: Main python program 
+PlantDRPpred.py 	: Main python program 
 
-svc_model        : Model file required for running Machine-learning model
+Models        : Model file required for running Machine-learning model
 
 seq.fasta	: Example file contain peptide sequences in FASTA format
 
