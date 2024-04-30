@@ -2,7 +2,7 @@
 A method for prediction Plant Diesease Resistance Protein
 
 # Introduction
-plantDRPpred is developed for predicting, mapping and scanning plant resistances proteins . More information on PlantDRPpred is available from its web server http://webs.iiitd.edu.in/raghava/plantdrppred. This page provide information about standalone version of PlantDRPpred.
+PlantDRPpred is developed for predicting, mapping and scanning plant resistances proteins . More information on PlantDRPpred is available from its web server http://webs.iiitd.edu.in/raghava/plantdrppred. This page provide information about standalone version of PlantDRPpred.
 
 ## PIP Installation
 PIP version is also available for easy installation and usage of this tool. The following command is required to install the package 
