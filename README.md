@@ -85,7 +85,7 @@ LICENSE       	: License information
 
 Fea_Seq : This folder contains the gerated features 
 
-pfeature_standaslone : This folder allow to genrate AAC feature 
+pfeature : This folder allow to genrate AAC feature 
 
 PSSM : This folder allow to genrate PSSM feature 
 
