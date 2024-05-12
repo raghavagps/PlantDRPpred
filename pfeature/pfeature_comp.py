@@ -2300,7 +2300,7 @@ if Job == 'AAC' or Job == 'ALLCOMP':
         df = pd.read_csv('tempfile_out')
         df.iloc[:,:-1].to_csv(result_filename,index=None)
         df.iloc[:,:-1].to_csv('sam_allcomp.aac',index=None)
-        os.remove('tempfile_out')
+        # os.remove('tempfile_out')
     if nter != 0:
         file1 = nt(Sequence,nter)
         file1.to_csv('sam_input.csv', index=None, header=False)
