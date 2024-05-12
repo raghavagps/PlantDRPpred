@@ -1,5 +1,5 @@
-###################################################################################################
-# PlantDRPpred is developed for predicting, desigining and scanning the Plant resistances proteins  #
+####################################################################################################
+# PlantDRPpred is developed for predicting, designing and scanning the Plant resistances proteins  #
 #  It is developed by Prof G. P. S. Raghava's group.                                                #
 # Please cite: https://webs.iiitd.edu.in/raghava/plantdrppred/                                      #
 ###################################################################################################
@@ -10,6 +10,12 @@ import joblib
 import argparse
 import subprocess
 import shutil
+import sys
+import glob
+import re
+import zipfile
+import requests
+
 
 def save_fasta_sequences(input_file):
     """
@@ -26,12 +32,14 @@ def save_fasta_sequences(input_file):
     print("Input saved to", output_file)
     return output_file
 
+
+
 def run_option_1(input_file, output_file="output_results.csv"):
     # Save FASTA sequences first
     save_fasta_sequences(input_file)  
     
     # Change directory to pfeature_standalone
-    os.chdir("pfeature_standalone")
+    os.chdir("pfeature")
     # AAC feature extraction of the test file
     subprocess.run(["python3", "pfeature_comp.py", "-i", "../Fea_Seq/sequences.fasta", "-o", "../Fea_Seq/AAC_feature.csv", "-j", "AAC"])
     # Change back to the original directory
@@ -48,12 +56,17 @@ def run_option_1(input_file, output_file="output_results.csv"):
     headers = [line.strip()[1:] for line in fasta_lines if line.startswith(">")]
 
     # Create a DataFrame with sequence IDs and probabilities
-    results_df = pd.DataFrame({"ID": headers, "Probability": y_pred_proba})
+    results_df = pd.DataFrame({"ID": headers, "ML_Score": y_pred_proba})
 
     # Save the DataFrame to a CSV file
     results_df.to_csv(output_file, index=False)
     print(f"Output of SVC with AAC saved to {output_file}")
     return y_pred_proba  # Return predicted probabilities
+
+
+
+
+
 
 def save_sequences_in_output_files(fasta_file, folder_path, pssm_output_file, not_in_pssm_output_file):
     # Function to read sequences from a FASTA file
@@ -93,6 +106,110 @@ def save_sequences_in_output_files(fasta_file, folder_path, pssm_output_file, no
 
     # print(f"Sequences not in pssm_raw folder saved to {not_in_pssm_output_file}")
 
+
+def generate_pssm(dir_path):
+    """
+    Function to generate PSSM profiles for FASTA files in the specified directory.
+    """
+    # Create directories to store intermediate and final PSSM files
+    os.makedirs(os.path.join(dir_path, 'pssm_raw1'), exist_ok=True)
+    os.makedirs(os.path.join(dir_path, 'pssm_raw'), exist_ok=True)
+
+    # Find all FASTA files in the specified directory
+    listdir = glob.glob(os.path.join(dir_path, '*.fasta'))
+    
+    # Iterate over each FASTA file
+    for i in listdir:
+        # Extract filename without extension
+        filename = os.path.splitext(os.path.basename(i))[0]
+        
+        # Construct PSI-BLAST command to generate PSSM profile
+        cmd_psiblast = f"psiblast -out {os.path.join(dir_path, 'pssm_raw1', filename)}.homologs -outfmt 7 -query {i} -db swissprot/Uniprot_database -evalue 0.0001 -word_size 3 -max_target_seqs 6000 -num_threads 4 -gapopen 11 -gapextend 1 -matrix BLOSUM62 -comp_based_stats T -num_iterations 3 -out_pssm {os.path.join(dir_path, 'pssm_raw1', filename)}.cptpssm -out_ascii_pssm {os.path.join(dir_path, 'pssm_raw', filename)}.pssm"
+        
+        # Print and execute the PSI-BLAST command
+        print(cmd_psiblast)
+        os.system(cmd_psiblast)
+
+# Assuming the current directory as the directory to download and extract the SwissProt database
+current_dir = os.getcwd()
+
+# Check if the swissprot directory exists
+if not os.path.exists(os.path.join(current_dir, 'swissprot')):
+    # If it doesn't exist, download the SwissProt database ZIP file
+    response = requests.get('https://webs.iiitd.edu.in/raghava/plantdrppred/swissprot.zip')
+    if response.status_code == 200:
+        # Write the downloaded ZIP file
+        with open(os.path.join(current_dir, 'swissprot.zip'), 'wb') as f:
+            f.write(response.content)
+        
+        # Extract the contents of the ZIP file
+        with zipfile.ZipFile(os.path.join(current_dir, 'swissprot.zip'), 'r') as zip_ref:
+            zip_ref.extractall(current_dir)
+        
+        # Remove the downloaded ZIP file
+        os.remove(os.path.join(current_dir, 'swissprot.zip'))
+
+# Function for generating PSSM profiles for FASTA files and downloading SwissProt database
+generate_pssm(current_dir)
+
+# file_split function for PSSM
+def readseq(file):
+    with open(file) as f:
+        records = f.read()
+    records = records.split('>')[1:]
+    seqid = []
+    seq = []
+    for fasta in records:
+        array = fasta.split('\n')
+        name, sequence = array[0].split()[0], re.sub('[^ACDEFGHIKLMNPQRSTVWY-]', '', ''.join(array[1:]).upper())
+        seqid.append('>'+name)
+        seq.append(sequence)
+    if len(seqid) == 0:
+        f=open(file,"r")
+        data1 = f.readlines()
+        for each in data1:
+            seq.append(each.replace('\n',''))
+        for i in range (1,len(seq)+1):
+            seqid.append(">Seq_"+str(i))
+    final_df = pd.concat([pd.DataFrame(seqid),pd.DataFrame(seq)], axis=1)
+    final_df.columns = ['ID','Seq']
+    return final_df
+def file_split(file,path):
+    df1 = readseq(file)
+    for i in range(len(df1)):
+        df1.loc[i].to_csv(path+'/'+df1['ID'][i].replace('>','')+'.fasta', index=None,header=False,sep="\n")
+
+
+def process_blast_results(blast_result_file, results_df1):
+    df1 = pd.read_csv(blast_result_file, sep="\t", names=['name','hit','identity','r1','r2','r3','r4','r5','r6','r7','r8','r9'])
+
+    cc = []
+    
+    if os.stat(blast_result_file).st_size != 0: 
+        for i in results_df1['ID']:
+            if len(df1.loc[df1['name'] == i]) > 0:
+                df4 = df1[['name','hit']].loc[df1['name'] == i].reset_index(drop=True)
+                if df4['hit'][0].split('_')[0] == 'P':
+                    cc.append(0.5)    
+                elif df4['hit'][0].split('_')[0] == 'N':
+                    cc.append(-0.5)  
+            else:
+                cc.append(0)
+    else:
+        cc = [0] * len(results_df1)
+
+    df6 = pd.DataFrame()
+    df6["ID"] = results_df1["ID"]
+    df6['BLAST_Score'] = cc
+    df6['ML_Score'] = results_df1["ML_Score"]
+    df6['Total_Score'] = df6['ML_Score'] + df6['BLAST_Score']
+
+    return df6
+
+
+
+
+
 def run_option_2(input_file, output_file="output_results.csv"):
     save_fasta_sequences(input_file)  # Save FASTA sequences first
 
@@ -111,8 +228,9 @@ def run_option_2(input_file, output_file="output_results.csv"):
             print("Error creating folder:", e)
 
     # PSSM feature extraction
-    subprocess.run(["python3", "PSSM/file_split.py", "Fea_Seq/sequences.fasta", "Fea_Seq/file_split"])
-    subprocess.run(["python3", "PSSM/pssm_gen.py", "Fea_Seq/file_split"])
+    file_split("Fea_Seq/sequences.fasta", "Fea_Seq/file_split")
+    # pssm profile generate 
+    generate_pssm(folder_path)
     
     fasta_file = 'Fea_Seq/sequences.fasta'
     folder_path = 'Fea_Seq/file_split/pssm_raw'
@@ -155,7 +273,7 @@ def run_option_2(input_file, output_file="output_results.csv"):
         all_probabilities = list(y_pred_proba_aac) + list(y_pred_proba_pssm)
 
     # Create a DataFrame with sequence IDs and probabilities
-    results_df = pd.DataFrame({"ID": all_headers, "Probability": all_probabilities})
+    results_df = pd.DataFrame({"ID": all_headers, "ML_Score": all_probabilities})
     # Drop duplicates
     results_df = results_df.drop_duplicates()
    
@@ -166,14 +284,22 @@ def run_option_2(input_file, output_file="output_results.csv"):
     results_df = pd.read_csv(output_file)
 
     # Remove duplicates
-    results_df = results_df.drop_duplicates()
+    results_df1 = results_df.drop_duplicates()
+    if os.path.exists("res.out"):
+        os.remove("res.out")
 
-    # Save the DataFrame back to the CSV file
-    results_df.to_csv(output_file, index=False)
+    # Run blastp command
+    subprocess.run(["blastp", "-task", "blastp", "-db", "Database/train", "-query", input_file , "-out", "res.out", "-outfmt", "6", "-evalue", "0.01"])
+    # Process blast results
+    blast_result_file = "res.out"
+    df6 = process_blast_results(blast_result_file, results_df1)
+    
+    # Save the DataFrame to a CSV file
+    df6.to_csv(output_file, index=False)
     print(f"Output of ET with PSSM saved to {output_file}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Plant Resistance Protein Prediction Tool")
+    parser = argparse.ArgumentParser(description="Plant Disease Resistance Protein Prediction Tool")
     parser.add_argument("-i", "--input", help="Input FASTA file (.fasta format)")
     parser.add_argument("-o", "--output", help="Output CSV file name (default: output_results.csv)", default="output_results.csv")
     parser.add_argument("-m", "--model", help="Choose model option (1: AAC feature extraction and SVC model, 2: PSSM feature extraction and ET model)")
@@ -196,3 +322,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
