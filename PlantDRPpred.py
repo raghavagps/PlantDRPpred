@@ -22,6 +22,7 @@ def save_fasta_sequences(input_file):
     Function to save FASTA sequences provided by the user to a file.
     """
     output_folder = "Fea_Seq"
+    os.makedirs(output_folder, exist_ok=True)
     output_file = os.path.join(output_folder, "sequences.fasta")
     
     with open(input_file, 'r') as f:
