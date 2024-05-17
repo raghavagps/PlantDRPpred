@@ -131,8 +131,6 @@ def generate_pssm(dir_path):
         print(cmd_psiblast)
         os.system(cmd_psiblast)
 
-# Assuming the current directory as the directory to download and extract the SwissProt database
-current_dir = os.getcwd()
 
 # Check if the swissprot directory exists
 if not os.path.exists(os.path.join(current_dir, 'swissprot')):
