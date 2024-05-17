@@ -150,8 +150,7 @@ if not os.path.exists(os.path.join(current_dir, 'swissprot')):
         # Remove the downloaded ZIP file
         os.remove(os.path.join(current_dir, 'swissprot.zip'))
 
-# Function for generating PSSM profiles for FASTA files and downloading SwissProt database
-generate_pssm(current_dir)
+
 
 # file_split function for PSSM
 def readseq(file):
