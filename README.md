@@ -12,15 +12,6 @@ To know about the available option for the pip package, type the following comma
 ```
 plantdrppred -h
 ```
-## Standalone
-The Standalone version of PlantDRPpred is written in python3 and following libraries are necessary for the successful run:
-
-- scikit-learn==1.3.2
-- argparse
-- biopython
-- numpy
-- pandas
-=======
 # Standalone
 
 Standalone version of PlantDRPpred is written in python3 and the following libraries are necessary for a successful run:
@@ -30,8 +21,6 @@ Standalone version of PlantDRPpred is written in python3 and the following libra
 - Numpy
 - blastp
 
-
-**Minimum USAGE** 
 
 ## Minimum USAGE
 To know about the available option for the standalone, type the following command:
