@@ -7,18 +7,18 @@ PlantDRPpred is developed for predicting, mapping and scanning plant resistances
 ## PIP Installation
 PIP version is also available for easy installation and usage of this tool. The following command is required to install the package 
 ```
-pip install PlantDRPpred
+pip install plantdrppred
 ```
 To know about the available option for the pip package, type the following command:
 ```
-PlantDRPpred -h
+plantdrppred -h
 ```
 
 # Standalone
 
 Standalone version of PlantDRPpred is written in python3 and the following libraries are necessary for a successful run:
 
-- scikit-learn
+- scikit-learn = 1.3.2
 - Pandas
 - Numpy
 - blastp
@@ -28,11 +28,11 @@ Standalone version of PlantDRPpred is written in python3 and the following libra
 
 To know about the available option for the standalone, type the following command:
 ```
-PlantDRPpred.py -h
+plantdrppred.py -h
 ```
 To run the example, type the following command:
 ```
-PlantDRPpred.py -i seq.fasta
+plantdrppred.py -i seq.fasta
 
 ```
 where seq.fasta is a input FASTA file. This will predict plant resistances protein in FASTA format. It will use other parameters by default. It will save output in "output_result.csv" in CSV (comma separated variables).
@@ -40,7 +40,7 @@ where seq.fasta is a input FASTA file. This will predict plant resistances prote
 **Full Usage**: 
 ```
 Following is complete list of all options, you may get these options
-usage: toxinpred2.py [-h] 
+usage: plantdrppred.py [-h] 
                      [-i INPUT]
                      [-o OUTPUT]
                      [-m {1,2}] 
