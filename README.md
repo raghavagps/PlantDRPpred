@@ -36,7 +36,6 @@ Standalone version of PlantDRPpred is written in python3 and the following libra
 ## Minimum USAGE
 To know about the available option for the standalone, type the following command:
 ```
-<<<<<<< HEAD
 python plantdrppred.py -h
 ```
 To run the example, type the following command:
