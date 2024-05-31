@@ -42,7 +42,7 @@ plantdrppred.py -h
 ```
 To run the example, type the following command:
 ```
-plantdrppred.py -i seq.fasta
+plantdrppred.py -i example_input.fasta
 
 ```
 ```
