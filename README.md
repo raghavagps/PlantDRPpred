@@ -15,15 +15,30 @@ plantdrppred -h
 ## Standalone
 The Standalone version of PlantDRPpred is written in python3 and following libraries are necessary for the successful run:
 
+<<<<<<< HEAD
 - scikit-learn==1.3.2
 - argparse
 - biopython
 - numpy
 - pandas
+=======
+# Standalone
+
+Standalone version of PlantDRPpred is written in python3 and the following libraries are necessary for a successful run:
+
+- scikit-learn = 1.3.2
+- Pandas
+- Numpy
+- blastp
+
+
+**Minimum USAGE** 
+>>>>>>> e008ba70fe04dce30691efc30ba526b581c39890
 
 ## Minimum USAGE
 To know about the available option for the standalone, type the following command:
 ```
+<<<<<<< HEAD
 python plantdrppred.py -h
 ```
 To run the example, type the following command:
@@ -36,10 +51,30 @@ This will predict the probability whether a submitted sequence will localize to 
 ```
 usage: afpropred.py [-h] -i INPUT [-o OUTPUT] [-t THRESHOLD] [-m {1,2}] [-d {1,2}]
                     [-wd WORKING]
+=======
+plantdrppred.py -h
+```
+To run the example, type the following command:
+```
+plantdrppred.py -i seq.fasta
+>>>>>>> e008ba70fe04dce30691efc30ba526b581c39890
 
 ```
 ```
+<<<<<<< HEAD
 Please provide following arguments.
+=======
+Following is complete list of all options, you may get these options
+usage: plantdrppred.py [-h] 
+                     [-i INPUT]
+                     [-o OUTPUT]
+                     [-m {1,2}] 
+```
+```
+Please provide following arguments
+
+optional arguments:
+>>>>>>> e008ba70fe04dce30691efc30ba526b581c39890
 
 options:
   -h, --help            show this help message and exit
