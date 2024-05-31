@@ -54,11 +54,9 @@ plantdrppred.py -h
 To run the example, type the following command:
 ```
 plantdrppred.py -i seq.fasta
->>>>>>> e008ba70fe04dce30691efc30ba526b581c39890
 
 ```
 ```
-<<<<<<< HEAD
 Please provide following arguments.
 =======
 Following is complete list of all options, you may get these options
@@ -71,7 +69,6 @@ usage: plantdrppred.py [-h]
 Please provide following arguments
 
 optional arguments:
->>>>>>> e008ba70fe04dce30691efc30ba526b581c39890
 
 options:
   -h, --help            show this help message and exit
