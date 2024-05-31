@@ -15,7 +15,6 @@ plantdrppred -h
 ## Standalone
 The Standalone version of PlantDRPpred is written in python3 and following libraries are necessary for the successful run:
 
-<<<<<<< HEAD
 - scikit-learn==1.3.2
 - argparse
 - biopython
@@ -33,7 +32,6 @@ Standalone version of PlantDRPpred is written in python3 and the following libra
 
 
 **Minimum USAGE** 
->>>>>>> e008ba70fe04dce30691efc30ba526b581c39890
 
 ## Minimum USAGE
 To know about the available option for the standalone, type the following command:
