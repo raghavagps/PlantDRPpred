@@ -1,6 +1,6 @@
 ##############################################################################
 #PlantDRPpred is developed for predicting Disease Resistance      #
-#peptides from their primary sequence. It is developed by Prof G. P. S.       #
+#Proteins from their primary sequence. It is developed by Prof G. P. S.       #
 #Raghava's group. Please cite : PlantDRPpred                                  #
 # ############################################################################
 import argparse  
@@ -278,7 +278,7 @@ def class_assignment_pssm(file, thr, out):
     df1.to_csv(out, index=None)
 
 print('##############################################################################')
-print('# The program PlantDRPpred is developed for predicting PDR and non-PDR peptides #')
+print('# The program PlantDRPpred is developed for predicting PDR and non-PDR proteins #')
 print("# from their primary sequence, developed by Prof G. P. S. Raghava's group. #")
 print('# ############################################################################')
 
