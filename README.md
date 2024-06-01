@@ -85,7 +85,7 @@ options:
 
 **Working Directory:** Directory where intermediate files as well as final results will be saved
 
-AfProPred Package Files
+PlantDRPpred Package Files
 =======================
 It contains the following files, brief description of these files given below
 
