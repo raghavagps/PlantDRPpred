@@ -35,14 +35,13 @@ This will predict the probability whether a submitted sequence will localize to 
 
 ## Full Usage
 ```
-usage: afpropred.py [-h] -i INPUT [-o OUTPUT] [-t THRESHOLD] [-m {1,2}] [-d {1,2}]
+usage: plantdrppred.py [-h] -i INPUT [-o OUTPUT] [-t THRESHOLD] [-m {1,2}] [-d {1,2}]
                     [-wd WORKING]
 =======
-plantdrppred.py -h
 ```
 To run the example, type the following command:
 ```
-plantdrppred.py -i seq.fasta
+plantdrppred.py -i example_input.fasta
 
 ```
 ```
@@ -86,7 +85,7 @@ options:
 
 **Working Directory:** Directory where intermediate files as well as final results will be saved
 
-AfProPred Package Files
+PlantDRPpred Package Files
 =======================
 It contains the following files, brief description of these files given below
 
