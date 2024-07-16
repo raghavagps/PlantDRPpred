@@ -1,7 +1,7 @@
 # **PlantDRPpred**
 A computational method to predict the plant disease resistance protein based on evolutionary profiles. 
 ## Introduction
-PlantDRPpred is a tool developed by Raghva-Lab in 2024. It is designed to predict whether a protein is Desiease Resistances or not in Plants . It utilizes amino-acid compositions  with XGBoost Classifier and PSSM as features to make predictions using an Random Forest Classifier. PlantDRPpred is also available as web-server at https://webs.iiitd.edu.in/raghava/plantdrppred. Please read/cite the content about the PlantDRPpred for complete information including algorithm behind the approach.
+PlantDRPpred is a tool developed by Raghava-Lab in 2024. It is designed to predict whether a plant protein is Disease Resistant or not. It utilizes amino-acid compositions  with XGBoost Classifier and PSSM as features to make predictions using an Random Forest Classifier. PlantDRPpred is also available as web-server at https://webs.iiitd.edu.in/raghava/plantdrppred. Please read/cite the content about the PlantDRPpred for complete information including algorithm behind the approach.
 
 ## PIP Installation
 PIP version is also available for easy installation and usage of this tool. The following command is required to install the package 
@@ -94,9 +94,11 @@ LICENSE				      : License information
 
 README.md			      : This file provide information about this package
 
+blastdb             : The folder contain blast database of all sequences in dataset 
+
 model               : This folder contains two pickled models
 
-swissprot           : This folder contains the swissprot database for generating PSSM profiles
+ncbi_blast_2.15     : This folder contains blast psiblast and blastp(for linux) 
 
 plantdrppred.py     : Main python program
 
