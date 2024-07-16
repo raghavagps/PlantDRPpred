@@ -68,7 +68,7 @@ options:
                         Threshold: Value between 0 to 1 by default 0.50
   -m {1,2}, --model {1,2}
                         Model: 1: PSSM feature based Random Forest Classifier , 2:  PSSM
-                        feature + BLAST based Random Forest , by default 1
+                        feature based Random Forest + BLAST , by default 1
   -d {1,2}, --display {1,2}
                         Display: 1: PDR, 2: All proteins, by default 2
   -wd WORKING, --working WORKING
@@ -101,8 +101,6 @@ swissprot           : This folder contains the swissprot database for generating
 plantdrppred.py     : Main python program
 
 possum              : This folder contains the program POSSUM, that is used to calculate PSSM features
-
-ncbi-blast-2.15.0+  : This folder contains the BLAST executables. Kindly download the BLAST executables from the following [link](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.15.0/) based on your OS. The blast directory should be in the same folder as plantdrppred.py 
 
 example_input.fasta : Example file containing protein sequences in FASTA format
 
