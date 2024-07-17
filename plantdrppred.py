@@ -258,7 +258,7 @@ def prediction_pssm(inputfile1, inputfile2, model1, model2, out):
         df_1.to_csv(out, index=None)
 
 
-def class_assignment_aac(file1, thr, out):
+def class_assignment(file1, thr, out):
     df1 = pd.read_csv(file1)
     cc = []
     for i in range(0,len(df1)):
@@ -270,7 +270,7 @@ def class_assignment_aac(file1, thr, out):
     # df1 =  df1.round(3)
     df1.to_csv(out, index=None)
 
-def class_assignment_pssm(file, thr, out):
+def class_assignment_blast(file, thr, out):
     pred_df = pd.read_csv(file)
     df1 = BLAST_processor(wd+'/RES_1_6_6.out',pred_df, thr)
     #print(df1.head())
@@ -336,7 +336,7 @@ if Model==1:
     feat_gen_pssm(Sequence, wd + '/seq.aac', wd + '/seq.pssm')
     os.system(nf_path + '/ncbi_blast_2.15/bin/blastp -query ' + Sequence +  ' -db ' + nf_path +  '/blastdb/train -out ' + wd + '/RES_1_6_6.out -outfmt 6 -evalue 0.01' )
     prediction_pssm(wd + '/seq.aac', wd + '/seq.pssm', nf_path + '/model/model_aac', nf_path + '/model/model_pssm', wd + '/seq.pred')
-    class_assignment_aac(wd +'/seq.pred',Threshold, wd + '/seq.out')
+    class_assignment(wd +'/seq.pred',Threshold, wd + '/seq.out')
     df1 = pd.DataFrame(seqid)
     df2 = pd.DataFrame(seq)
     df3 = pd.read_csv(wd + "/seq.out")
@@ -356,11 +356,8 @@ else:
     os.makedirs(wd + '/fasta_files', exist_ok=True)
     os.makedirs(wd + '/pssm_files', exist_ok=True)
     feat_gen_pssm(Sequence, wd + '/seq.aac', wd + '/seq.pssm')
-    os.system(nf_path + '/ncbi_blast_2.15/bin/blastp -query ' + Sequence +  ' -db ' + nf_path +  '/blastdb/train -out ' + wd + '/RES_1_6_6.out -outfmt 6 -evalue 0.01' )
     prediction_pssm(wd + '/seq.aac', wd + '/seq.pssm', nf_path + '/model/model_aac', nf_path + '/model/model_pssm', wd + '/seq.pred')
-    class_assignment_pssm(wd +'/seq.pred', Threshold, wd + '/seq.out')
-
-
+    class_assignment_blast(wd +'/seq.pred', Threshold, wd + '/seq.out')
     df1 = pd.DataFrame(seqid)
     df2 = pd.DataFrame(seq)
     df3 = pd.read_csv(wd + "/seq.out")
