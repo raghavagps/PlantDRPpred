@@ -344,8 +344,6 @@ if Model==1:
     df4 = pd.concat([df1,df2,df3],axis=1)
     df4 = df4.drop(columns=['ID'])
     df4.columns = ['ID','Sequence','ML Score','Prediction']
-    df4.loc[df4['ML Score'] > 1, 'ML Score'] = 1
-    df4.loc[df4['ML Score'] < 0, 'ML Score'] = 0
     if dplay == 1:
         df4 = df4.loc[df4.Prediction=="PDR"]
     df4.to_csv(result_filename, index=None)
@@ -365,8 +363,8 @@ else:
     df3 = df3.iloc[:,-4:]
     df4 = pd.concat([df1,df2,df3],axis=1)
     df4.columns = ['ID','Sequence','ML Score','Blast Score', 'Hybrid Score', 'Prediction']
-    df4.loc[df4['Hybrid Score'] > 1, 'ML Score'] = 1
-    df4.loc[df4['Hybrid Score'] < 0, 'ML Score'] = 0
+    df4.loc[df4['Hybrid Score'] > 1, 'Hybrid Score'] = 1
+    df4.loc[df4['Hybrid Score'] < 0, 'Hybrid Score'] = 0
     if dplay == 1:
         df4 = df4.loc[df4.Prediction=="PDR"]
     df4.to_csv(result_filename, index=None)
