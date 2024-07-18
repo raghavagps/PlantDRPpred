@@ -334,7 +334,6 @@ if Model==1:
     os.makedirs(wd + '/fasta_files', exist_ok=True)
     os.makedirs(wd + '/pssm_files', exist_ok=True)
     feat_gen_pssm(Sequence, wd + '/seq.aac', wd + '/seq.pssm')
-    os.system(nf_path + '/ncbi_blast_2.15/bin/blastp -query ' + Sequence +  ' -db ' + nf_path +  '/blastdb/train -out ' + wd + '/RES_1_6_6.out -outfmt 6 -evalue 0.01' )
     prediction_pssm(wd + '/seq.aac', wd + '/seq.pssm', nf_path + '/model/model_aac', nf_path + '/model/model_pssm', wd + '/seq.pred')
     class_assignment(wd +'/seq.pred',Threshold, wd + '/seq.out')
     df1 = pd.DataFrame(seqid)
@@ -344,8 +343,6 @@ if Model==1:
     df4 = pd.concat([df1,df2,df3],axis=1)
     df4 = df4.drop(columns=['ID'])
     df4.columns = ['ID','Sequence','ML Score','Prediction']
-    df4.loc[df4['ML Score'] > 1, 'ML Score'] = 1
-    df4.loc[df4['ML Score'] < 0, 'ML Score'] = 0
     if dplay == 1:
         df4 = df4.loc[df4.Prediction=="PDR"]
     df4.to_csv(result_filename, index=None)
@@ -357,6 +354,7 @@ else:
     os.makedirs(wd + '/pssm_files', exist_ok=True)
     feat_gen_pssm(Sequence, wd + '/seq.aac', wd + '/seq.pssm')
     prediction_pssm(wd + '/seq.aac', wd + '/seq.pssm', nf_path + '/model/model_aac', nf_path + '/model/model_pssm', wd + '/seq.pred')
+    os.system(nf_path + '/ncbi_blast_2.15/bin/blastp -query ' + Sequence +  ' -db ' + nf_path +  '/blastdb/train -out ' + wd + '/RES_1_6_6.out -outfmt 6 -evalue 0.01' )
     class_assignment_blast(wd +'/seq.pred', Threshold, wd + '/seq.out')
     df1 = pd.DataFrame(seqid)
     df2 = pd.DataFrame(seq)
@@ -365,8 +363,8 @@ else:
     df3 = df3.iloc[:,-4:]
     df4 = pd.concat([df1,df2,df3],axis=1)
     df4.columns = ['ID','Sequence','ML Score','Blast Score', 'Hybrid Score', 'Prediction']
-    df4.loc[df4['Hybrid Score'] > 1, 'ML Score'] = 1
-    df4.loc[df4['Hybrid Score'] < 0, 'ML Score'] = 0
+    df4.loc[df4['Hybrid Score'] > 1, 'Hybrid Score'] = 1
+    df4.loc[df4['Hybrid Score'] < 0, 'Hybrid Score'] = 0
     if dplay == 1:
         df4 = df4.loc[df4.Prediction=="PDR"]
     df4.to_csv(result_filename, index=None)
