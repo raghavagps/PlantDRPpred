@@ -37,7 +37,6 @@ This will predict the probability whether a submitted sequence will PDR or non-P
 ```
 usage: plantdrppred.py [-h] -i INPUT [-o OUTPUT] [-t THRESHOLD] [-m {1,2}] [-d {1,2}]
                     [-wd WORKING]
-=======
 ```
 To run the example, type the following command:
 ```
